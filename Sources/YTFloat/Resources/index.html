@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>YTFloat</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body>
+  <div id="player"></div>
+  <main id="welcome">
+    <div class="mark" aria-hidden="true">▶</div>
+    <h1>A little window.<br>A whole lot to watch.</h1>
+    <p>Open a YouTube link to make it float.</p>
+    <button id="open">Open YouTube Link <span>⌘O</span></button>
+    <p class="hint">Or paste a link with ⌘V</p>
+  </main>
+  <section id="notice" hidden role="status">
+    <h2 id="notice-title"></h2>
+    <p id="notice-detail"></p>
+    <div><button id="retry">Try Again</button><button id="external">Open on YouTube ↗</button></div>
+  </section>
+  <button id="play" hidden aria-label="Start playback">▶ Play video</button>
+  <script src="player.js"></script>
+</body>
+</html>
