@@ -3,10 +3,10 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 CONFIG="${CONFIGURATION:-release}"
 export CLANG_MODULE_CACHE_PATH="$PWD/.build/ModuleCache"
-SDK_FLAGS=()
+BUILD_ARGS=(--build-system native --scratch-path "$PWD/.build/native" -c "$CONFIG" --disable-sandbox --cache-path "$PWD/.build/cache")
 SDK_MAJOR="$(xcrun --sdk macosx --show-sdk-version | cut -d. -f1)"
-if [ "$SDK_MAJOR" -ge 27 ]; then SDK_FLAGS=(-Xswiftc -DYTFLOAT_SDK_27); fi
-swift build --build-system native --scratch-path "$PWD/.build/native" -c "$CONFIG" --disable-sandbox --cache-path "$PWD/.build/cache" "${SDK_FLAGS[@]}"
+if [ "$SDK_MAJOR" -ge 27 ]; then BUILD_ARGS+=(-Xswiftc -DYTFLOAT_SDK_27); fi
+swift build "${BUILD_ARGS[@]}"
 BIN="$(swift build --build-system native --scratch-path "$PWD/.build/native" -c "$CONFIG" --show-bin-path --disable-sandbox --cache-path "$PWD/.build/cache")"
 APP="$PWD/dist/YTFloat.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Helpers" "$APP/Contents/Resources"
